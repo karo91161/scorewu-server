@@ -1,7 +1,10 @@
+// app.js or index.js
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const fixturesRoutes = require('./routes/fixtures');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +25,7 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
 
 // Routes
 app.use('/api', authRoutes);
+app.use('/api', fixturesRoutes);
 
 // Start server
 app.listen(PORT, () => {
