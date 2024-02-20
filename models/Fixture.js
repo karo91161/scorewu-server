@@ -67,16 +67,7 @@ const fixtureSchema = new mongoose.Schema({
             home: Number,
             away: Number
         }
-    },
-    events: [{
-        time: Date, // Assuming time is a Date object
-        team: String, // Assuming team is represented by a String, adjust as needed
-        player: String, // Assuming player is represented by a String, adjust as needed
-        assist: String, // Assuming assist is represented by a String, adjust as needed
-        type: String,
-        detail: String,
-        comments: String // Assuming comments is represented by a String, adjust as needed
-    }]
+    }
 });
 
 // Create a Mongoose model based on the schema
