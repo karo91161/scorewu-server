@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const fixturesRoutes = require('./routes/fixtures');
+const fixturesController = require('./controllers/fixturesController');
+const setupCronJob = require('./cronJobs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +21,8 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
   useUnifiedTopology: true
 }).then(() => {
   console.log('Connected to MongoDB');
+  setupCronJob();
+  fixturesController.getFixtures();
 }).catch((err) => {
   console.error('Failed to connect to MongoDB', err);
 });
