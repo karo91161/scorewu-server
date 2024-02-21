@@ -45,10 +45,10 @@ const saveFixtures = (fixturesData) => {
         fixtureEntity.save();
      });
   } catch (error) {
-      console.error('Error parsing or processing fixtures data:', error);
+    logger.error('Error fetching fixtures:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
 
 module.exports = {
     getFixtures,
