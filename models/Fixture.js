@@ -67,6 +67,10 @@ const fixtureSchema = new mongoose.Schema({
             home: Number,
             away: Number
         }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 

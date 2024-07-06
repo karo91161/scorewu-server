@@ -1,11 +1,8 @@
-// app.js or index.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const fixturesRoutes = require('./routes/fixtures');
-const fixturesController = require('./controllers/fixturesController');
 const setupCronJob = require('./cronJobs');
 
 const app = express();
@@ -22,7 +19,6 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
 }).then(() => {
   console.log('Connected to MongoDB');
   setupCronJob();
-  fixturesController.getFixtures();
 }).catch((err) => {
   console.error('Failed to connect to MongoDB', err);
 });
