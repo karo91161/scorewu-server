@@ -35,7 +35,6 @@ const getFixtures = async () => {
       }
     });
 
-    logger.info('storedFixtures', storedFixtures);
     return storedFixtures;
 
   } catch (error) {
