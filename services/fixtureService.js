@@ -6,7 +6,7 @@ const logger = require('../utils/logger');
 const getFixtures = async () => {
   try {
     const newestFixture = await Fixture.findOne().sort({ createdAt: -1 });
-    if (!newestFixture || isMoreThanOneDayOld(newestFixture.createdAt)) {
+    if (!newestFixture || isNotTodayFixtures(newestFixture.createdAt)) {
       const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
         params: { live: 'all' },
         headers: {
@@ -43,9 +43,14 @@ const getFixtures = async () => {
   }
 };
 
-const isMoreThanOneDayOld = (date) => {
-  const oneDayInMs = 24 * 60 * 60 * 1000;
-  return new Date() - date > oneDayInMs;
+const isNotTodayFixtures = (date) => {
+  const today = new Date();
+  
+  // Normalize the dates to the start of the day
+  date.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+  
+  return date < today;
 };
 
 const saveFixtures = async (fixturesData) => {
