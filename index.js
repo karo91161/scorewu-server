@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const fixturesRoutes = require('./routes/fixtures');
+const predictionRoutes = require('./routes/prediction');
 const setupCronJob = require('./cronJobs');
 
 const app = express();
@@ -26,6 +27,7 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
 // Routes
 app.use('/api', authRoutes);
 app.use('/api', fixturesRoutes);
+app.use('/api', predictionRoutes);
 
 // Start server
 app.listen(PORT, () => {

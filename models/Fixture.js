@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-// Define the schema for the fixture object
 const fixtureSchema = new mongoose.Schema({
     fixture: {
         id: Number,
         referee: String,
         timezone: String,
-        date: Date, // Parse the date string into a Date object
+        date: Date,
         timestamp: Number,
         periods: {
             first: Number,
@@ -37,13 +36,13 @@ const fixtureSchema = new mongoose.Schema({
             id: Number,
             name: String,
             logo: String,
-            winner: Boolean // Changed from String to Boolean assuming it represents the winner status
+            winner: Boolean
         },
         away: {
             id: Number,
             name: String,
             logo: String,
-            winner: Boolean // Changed from String to Boolean assuming it represents the winner status
+            winner: Boolean
         }
     },
     goals: {
@@ -74,7 +73,6 @@ const fixtureSchema = new mongoose.Schema({
     }
 });
 
-// Create a Mongoose model based on the schema
 const Fixture = mongoose.model('Fixture', fixtureSchema);
 
 module.exports = Fixture;

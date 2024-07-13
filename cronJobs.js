@@ -6,7 +6,7 @@ const setupCronJob = () => {
   cron.schedule('0 8 * * *', async () => {
     try {
       console.log('Running cron job to fetch fixtures...');
-      await fixturesController.getFixtures(null, null);
+      await fixturesController.getLiveFixtures(null, null);
       console.log('Cron job completed successfully.');
     } catch (error) {
       console.error('Error running cron job:', error);
