@@ -22,28 +22,34 @@ const getPredictions = async (fixtureId) => {
 };
 
 const savePrediction = async (predictionData, fixture) => {
-    try {
-      const confidenceString = predictionData.comparison.total.away;
-      const confidenceNumber = parseFloat(confidenceString.replace('%', ''));
-  
-      const prediction = new Prediction({
-        fixtureId: fixture.id,
-        winner: predictionData.predictions.winner.name,
-        confidence: confidenceNumber,
-        under_over: predictionData.predictions.under_over,
-        goals: {
-          home: parseFloat(predictionData.predictions.goals.home.replace('%', '')),
-          away: parseFloat(predictionData.predictions.goals.away.replace('%', ''))
-        },
-        advice: predictionData.predictions.advice
-      });
-  
-      await prediction.save();
-      console.log('Prediction saved successfully');
-    } catch (error) {
-      console.error('Error saving prediction:', error);
-    }
-  };
+  try {
+    const confidenceString = predictionData.comparison?.total?.away || '0%';
+    const confidenceNumber = parseFloat(confidenceString.replace('%', ''));
+
+    const winnerName = predictionData.predictions?.winner?.name || 'unknown';
+    const underOver = predictionData.predictions?.under_over || '+1'; // Set default value to '+1'
+    const goalsHome = predictionData.predictions?.goals?.home;
+    const goalsAway = predictionData.predictions?.goals?.away;
+    const advice = predictionData.predictions?.advice || 'No advice';
+
+    const prediction = new Prediction({
+      fixtureId: fixture.id,
+      winner: winnerName,
+      confidence: confidenceNumber,
+      under_over: underOver,
+      goals: {
+        home: goalsHome ? parseFloat(goalsHome.replace('%', '')) : 0,
+        away: goalsAway ? parseFloat(goalsAway.replace('%', '')) : 0
+      },
+      advice: advice
+    });
+
+    await prediction.save();
+    console.log('Prediction saved successfully');
+  } catch (error) {
+    console.error('Error saving prediction:', error);
+  }
+};
 
 const getPredictionForTodayFixture = async () => {
     try {

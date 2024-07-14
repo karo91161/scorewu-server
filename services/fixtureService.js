@@ -48,8 +48,7 @@ const getTodayFixtures = async (page = 1, limit = 50) => {
 
 const getLiveFixtures = async (page = 1, limit = 50) => {
   try {
-    const newestFixture = await Fixture.findOne().sort({ createdAt: -1 });
-
+    const newestFixture = await Fixture.findOne({ 'fixture.status.short': { $in: ['FT', '1H', 'HT', '2H', 'ET', 'BT', 'P'] } }).sort({ createdAt: -1 });
     if (!newestFixture || isNotTodayFixtures(newestFixture.createdAt)) {
       const response = await axios.get('https://v3.football.api-sports.io/fixtures', {
         params: { live: 'all' },
@@ -72,11 +71,13 @@ const getLiveFixtures = async (page = 1, limit = 50) => {
 
     const skip = (page - 1) * limit;
     const storedFixtures = await Fixture.find({
-      createdAt: { $gte: today, $lt: tomorrow }
+      createdAt: { $gte: today, $lt: tomorrow },
+      'fixture.status.short': { $in: ['FT', '1H', 'HT', '2H', 'ET', 'BT', 'P'] } 
     }).skip(skip).limit(limit);
 
     const totalCount = await Fixture.countDocuments({
-      createdAt: { $gte: today, $lt: tomorrow }
+      createdAt: { $gte: today, $lt: tomorrow },
+      'fixture.status.short': { $in: ['FT', '1H', 'HT', '2H', 'ET', 'BT', 'P'] } 
     });
 
     return { fixtures: storedFixtures, totalCount };
