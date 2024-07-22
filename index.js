@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -5,6 +6,8 @@ const authRoutes = require('./routes/auth');
 const fixturesRoutes = require('./routes/fixtures');
 const predictionRoutes = require('./routes/prediction');
 const setupCronJob = require('./cronJobs');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,10 +27,17 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
   console.error('Failed to connect to MongoDB', err);
 });
 
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/scorewu' })
+}));
+
 // Routes
-app.use('/api', authRoutes);
-app.use('/api', fixturesRoutes);
-app.use('/api', predictionRoutes);
+app.use(authRoutes);
+app.use(fixturesRoutes);
+app.use(predictionRoutes);
 
 // Start server
 app.listen(PORT, () => {
