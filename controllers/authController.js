@@ -37,8 +37,6 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  logger.info("asdasd");
-
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to log out' });
