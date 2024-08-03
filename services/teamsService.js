@@ -2,13 +2,15 @@ const axios = require('axios');
 const Team = require('../models/Team');
 const API_URL = 'https://v3.football.api-sports.io';
 const API_KEY = '331c458bbf6622ce048a5e4b7e9a6fcf';
+const logger = require('../utils/logger');
 
 const getTeamsService = async (league, season) => {
     try {
-        const existingTeams = await Team.findOne({});
-      if (existingTeams) {
-        return existingTeams;
-      }
+        const existingTeams = await Team.find({ 'league.id': league, 'league.season': season });
+        if (existingTeams.length > 0) {
+            logger.info('existingTeams', existingTeams);
+            return existingTeams;
+        }
   
       const response = await axios.get(`${API_URL}/teams`, {
         params: { league, season },
