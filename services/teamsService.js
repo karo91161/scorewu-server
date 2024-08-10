@@ -8,7 +8,6 @@ const getTeamsService = async (league, season) => {
     try {
         const existingTeams = await Team.find({ 'league.id': league, 'league.season': season });
         if (existingTeams.length > 0) {
-            logger.info('existingTeams', existingTeams);
             return existingTeams;
         }
   
