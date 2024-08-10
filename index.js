@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth');
 const fixturesRoutes = require('./routes/fixtures');
 const predictionRoutes = require('./routes/prediction');
 const teamsRoutes = require('./routes/teams');
+const favoritesRoutes = require('./routes/favoritesRoutes');
 const setupCronJob = require('./cronJobs');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -40,6 +41,7 @@ app.use(authRoutes);
 app.use(fixturesRoutes);
 app.use(predictionRoutes);
 app.use(teamsRoutes);
+app.use(favoritesRoutes);
 
 // Start server
 app.listen(PORT, () => {
