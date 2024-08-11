@@ -21,7 +21,6 @@ const getTeamsService = async (league, season) => {
   
       const teams = response.data.response;
   
-      // Mentsd el a csapatokat az adatbázisba
       await Team.insertMany(teams.map(team => ({
         team: {
           id: team.team.id,
@@ -46,7 +45,18 @@ const getTeamsService = async (league, season) => {
       throw error;
     }
   };
+
+  const getTeamByIdService = async (id) => {
+    try {
+      const team = await Team.findOne({ 'team.id': id });
+      return team;
+    } catch (error) {
+      console.error('Error fetching team by ID:', error);
+      throw error;
+    }
+  };
   
   module.exports = {
-    getTeamsService
+    getTeamsService,
+    getTeamByIdService
   };
