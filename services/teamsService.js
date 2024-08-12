@@ -1,7 +1,5 @@
 const axios = require('axios');
 const Team = require('../models/Team');
-const API_URL = 'https://v3.football.api-sports.io';
-const API_KEY = '331c458bbf6622ce048a5e4b7e9a6fcf';
 const logger = require('../utils/logger');
 
 const getTeamsService = async (league, season) => {
@@ -11,11 +9,11 @@ const getTeamsService = async (league, season) => {
             return existingTeams;
         }
   
-      const response = await axios.get(`${API_URL}/teams`, {
+      const response = await axios.get(`${process.env.API_URL}/teams`, {
         params: { league, season },
         headers: {
           'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': API_KEY
+          'x-rapidapi-key': process.env.API_KEY
         }
       });
   

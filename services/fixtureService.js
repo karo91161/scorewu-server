@@ -111,8 +111,19 @@ const saveFixtures = async (fixturesData) => {
   }
 };
 
+const getFixtureById = async (fixtureId) => {
+  try {
+    const fixture = await Fixture.findOne({ 'fixture.id': fixtureId });
+    return fixture;
+  } catch (error) {
+    console.error(`Error fetching fixture with ID ${fixtureId}:`, error);
+    throw error;
+  }
+};
+
 module.exports = {
   getLiveFixtures,
   getTodayFixtures,
-  saveFixtures
+  saveFixtures,
+  getFixtureById
 };
