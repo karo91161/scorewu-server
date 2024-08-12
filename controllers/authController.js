@@ -4,7 +4,6 @@ const logger = require('../utils/logger');
 
 exports.register = async (req, res) => {
   const { email, password } = req.body;
-  logger.info("req.body", req.body)
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await new User({ email, password: hashedPassword });
   try {
