@@ -1,7 +1,16 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/auth');
+const fixturesRoutes = require('./routes/fixtures');
+const predictionRoutes = require('./routes/prediction');
+const teamsRoutes = require('./routes/teams');
+const favoritesRoutes = require('./routes/favoritesRoutes');
+const teamPerformanceRoutes = require('./routes/teamPerformanceRoutes');
+const setupCronJob = require('./cronJobs');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,12 +25,25 @@ mongoose.connect('mongodb://localhost:27017/scorewu', {
   useUnifiedTopology: true
 }).then(() => {
   console.log('Connected to MongoDB');
+  setupCronJob();
 }).catch((err) => {
   console.error('Failed to connect to MongoDB', err);
 });
 
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/scorewu' })
+}));
+
 // Routes
-app.use('/api', authRoutes);
+app.use(authRoutes);
+app.use(fixturesRoutes);
+app.use(predictionRoutes);
+app.use(teamsRoutes);
+app.use(favoritesRoutes);
+app.use(teamPerformanceRoutes);
 
 // Start server
 app.listen(PORT, () => {
