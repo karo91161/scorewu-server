@@ -1,6 +1,6 @@
 # Score With You Server
 
-Welcome to the "Score With You" backend server! This repository contains the server-side code for managing sports data, predictions, and user interactions in a dynamic way.
+Welcome to the "Score With You" backend server! This repository contains the server-side code for managing sports data, predictions, teams and user interactions in a dynamic way.
 
 ## Description
 
