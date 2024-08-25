@@ -1,4 +1,3 @@
-// routes/fixtures.js
 const express = require('express');
 const router = express.Router();
 const fixturesController = require('../controllers/fixturesController');

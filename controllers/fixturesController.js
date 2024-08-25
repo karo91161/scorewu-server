@@ -1,4 +1,3 @@
-// controllers/fixturesController.js
 const { getLiveFixtures, getTodayFixtures, getFixtureById } = require('../services/fixtureService');
 
 exports.getLiveFixtures = async (req, res) => {

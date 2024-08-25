@@ -15,11 +15,9 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
 mongoose.connect('mongodb://localhost:27017/scorewu', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -37,7 +35,6 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/scorewu' })
 }));
 
-// Routes
 app.use(authRoutes);
 app.use(fixturesRoutes);
 app.use(predictionRoutes);
@@ -45,7 +42,6 @@ app.use(teamsRoutes);
 app.use(favoritesRoutes);
 app.use(teamPerformanceRoutes);
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

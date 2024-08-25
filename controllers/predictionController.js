@@ -1,4 +1,3 @@
-// controllers/predictionController.js
 const { getPredictionForTodayFixture } = require('../services/predictionService');
 
 exports.getPredictionForTodayFixture = async (req, res) => {
