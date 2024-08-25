@@ -1,22 +1,17 @@
-// logger.js
-
 const winston = require('winston');
 
-// Configure the Winston logger
 const logger = winston.createLogger({
-  level: 'info', // Set log level to 'info' (you can change it as needed)
-  format: winston.format.json(), // Log in JSON format
+  level: 'info',
+  format: winston.format.json(),
   transports: [
-    // Log to the console
     new winston.transports.Console({
       format: winston.format.combine(
-        winston.format.colorize(), // Add colors to the console output
-        winston.format.simple() // Simple format: `${level}: ${message} JSON.stringify({ ...rest })`
+        winston.format.colorize(),
+        winston.format.simple()
       )
     }),
-    // Log to a file
-    new winston.transports.File({ filename: 'error.log', level: 'error' }), // Log errors to error.log file
-    new winston.transports.File({ filename: 'combined.log' }) // Log all other messages to combined.log file
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' })
   ]
 });
 

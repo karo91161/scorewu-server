@@ -1,4 +1,3 @@
-// services/fixtureService.js
 const axios = require('axios');
 const Prediction = require('../models/Prediction');
 const logger = require('../utils/logger');
@@ -10,7 +9,7 @@ const getPredictions = async (fixtureId) => {
         params: { fixture: fixtureId },
         headers: {
           'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': '331c458bbf6622ce048a5e4b7e9a6fcf'
+          'x-rapidapi-key': process.env.API_KEY
         }
       });
   
@@ -53,7 +52,6 @@ const savePrediction = async (predictionData, fixture) => {
 
 const getPredictionForTodayFixture = async () => {
     try {
-      // Get today's fixtures
       const todayFixturesResult = await getTodayFixtures(1, 1);
       const fixture = todayFixturesResult.fixtures.find(fixture => fixture.fixture.status.short === 'NS');
   
@@ -61,19 +59,16 @@ const getPredictionForTodayFixture = async () => {
         return null;
       }
   
-      // Check if prediction already exists for this fixture
       const existingPrediction = await Prediction.findOne({ fixtureId: fixture.fixture.id });
       if (existingPrediction) {
         return existingPrediction;
       }
   
-      // Get prediction from API
       const predictionData = await getPredictions(fixture.fixture.id);
 
       if (!predictionData) {
         return null;
       }
-      // Save prediction to DB
       const savedPrediction = await savePrediction(predictionData, fixture.fixture);
       return savedPrediction;
   

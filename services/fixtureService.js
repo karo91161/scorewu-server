@@ -1,4 +1,3 @@
-// services/fixtureService.js
 const axios = require('axios');
 const Fixture = require('../models/Fixture');
 const logger = require('../utils/logger');
@@ -12,7 +11,7 @@ const getTodayFixtures = async (page = 1, limit = 50) => {
         params: { date: new Date().toISOString().split('T')[0] },
         headers: {
           'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': '331c458bbf6622ce048a5e4b7e9a6fcf'
+          'x-rapidapi-key': process.env.API_KEY
         }
       });
 
@@ -54,7 +53,7 @@ const getLiveFixtures = async (page = 1, limit = 50) => {
         params: { live: 'all' },
         headers: {
           'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': '331c458bbf6622ce048a5e4b7e9a6fcf'
+          'x-rapidapi-key': process.env.API_KEY
         }
       });
 
