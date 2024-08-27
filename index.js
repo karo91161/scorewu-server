@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/scorewu', {
+mongoose.connect('mongodb+srv://karo91161:7YM3rTvOMwu2swUx@scorewu.ujzz8.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -32,7 +32,7 @@ app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/scorewu' })
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://karo91161:7YM3rTvOMwu2swUx@scorewu.ujzz8.mongodb.net/' })
 }));
 
 app.use(authRoutes);
