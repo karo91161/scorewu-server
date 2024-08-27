@@ -15,7 +15,10 @@ const MongoStore = require('connect-mongo');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://master--stirring-brioche-cf58dd.netlify.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://karo91161:7YM3rTvOMwu2swUx@scorewu.ujzz8.mongodb.net/', {
