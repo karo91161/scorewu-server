@@ -23,7 +23,9 @@ app.use(express.json());
 
 mongoose.connect('mongodb+srv://karo91161:7YM3rTvOMwu2swUx@scorewu.ujzz8.mongodb.net/', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  connectTimeoutMS: 50000,
+  socketTimeoutMS: 50000,
 }).then(() => {
   console.log('Connected to MongoDB');
   setupCronJob();
