@@ -71,8 +71,33 @@ Dropout layers are used to reduce overfitting.
 
 ## 🚀 Getting Started
 
-```bash
-git clone https://github.com/karo91161/scorewu-server
-cd scorewu-server
-npm install
-npm run serve
+## Installation
+
+To set up the project locally, follow these steps:
+
+### Prerequisites
+
+- Node.js (v16 or later recommended)
+- npm (Node Package Manager)
+
+### Setup
+
+1. Clone the repository to your local machine:
+   ```bash
+   git clone [repository-url]
+   cd scorewu-server
+   ```
+
+2. Install the necessary dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the server:
+   ```bash
+   node index.js
+   ```
+
+## Usage
+
+Once the server is running, it listens on the default port and serves the API endpoints related to sports data and user management. Refer to the API documentation (not provided here) for detailed endpoint usage.
