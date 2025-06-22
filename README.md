@@ -1,47 +1,78 @@
-# Score With You Server
+# ScoreWU – Live Sports Tracker & Predictor (Backend)
 
-Welcome to the "Score With You" backend server! This repository contains the server-side code for managing sports data, predictions, teams and user interactions in a dynamic way.
+**ScoreWU** is a full-stack web application for live sports score tracking, match prediction, and user interaction via voting. The project was created as a BSc thesis at the University of Szeged, combining real-time data handling, user authentication, and machine learning-based forecasting.
 
-## Description
+## 🧠 Purpose
 
-The backend server for "Score With You" provides APIs for handling authentication, managing favorite teams, fixtures, and predictions. It integrates seamlessly with front-end applications to deliver real-time sports data and predictions to users.
+To build a unified platform that allows users to:
+- Track live sports matches
+- View match statistics and historical data
+- Make predictions and analyze outcomes
+- Follow favorite teams and leagues
 
-## Installation
+## 🔧 Tech Stack
 
-To set up the project locally, follow these steps:
+- **Frontend**: Vue.js, SCSS, i18n (multilingual support)
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Machine Learning**: TensorFlow.js (multilayer neural network)
+- **Authentication**: JWT, password hashing
+- **Other**: .env-based environment management, RESTful API structure
 
-### Prerequisites
+## ✨ Features
 
-- Node.js (v16 or later recommended)
-- npm (Node Package Manager)
+- 🔐 **User Authentication**  
+  Register/login with hashed passwords and session tokens
 
-### Setup
+- 📡 **Live Match Tracking**  
+  Real-time match data fetched from an external API
 
-1. Clone the repository to your local machine:
-   ```bash
-   git clone [repository-url]
-   cd scorewu-server
-   ```
+- 📊 **Prediction Engine**  
+  Neural network using previous season data to forecast match results
 
-2. Install the necessary dependencies:
-   ```bash
-   npm install
-   ```
+- ⚽ **Favorite Teams**  
+  Follow clubs across the top 5 leagues and view related stats
 
-3. Start the server:
-   ```bash
-   node index.js
-   ```
+- 🗓️ **Match Calendar**  
+  Daily schedule of upcoming and past matches
 
-## Usage
+- 🌍 **Multilingual UI**  
+  Language toggle between English and Hungarian
 
-Once the server is running, it listens on the default port and serves the API endpoints related to sports data and user management. Refer to the API documentation (not provided here) for detailed endpoint usage.
+- 🎨 **Responsive Design**  
+  Built with SCSS + global styling components
 
-## Technologies Used
+## 📷 Screenshots
 
-- **Node.js**: Core platform for running the server.
-- **Express**: Framework used for handling API requests.
-- **Mongoose**: MongoDB object modeling tool used to interact with the database.
-- **Winston**: Logging library for Node.js.
+![live](live-score.png)  
+*Live scores and quick stats*
 
-Ensure that you have the correct versions of Node.js and npm installed to avoid compatibility issues.
+![Predictions](predictions.png)  
+*Match analysis and forecast based on neural network*
+
+![Favorite Teams](my-team.png)  
+*My team section*
+
+![Teams](teams.png)  
+*Teams section*
+
+![Today](today.png)  
+*Today's prediction*
+
+## 🧠 About the Prediction Model
+
+The prediction module uses **TensorFlow.js** and is based on:
+- Goals scored and conceded from the previous season
+- Home vs away stats
+- Outcome probabilities: win, draw, loss
+- Average expected goals and predicted goal difference
+
+Dropout layers are used to reduce overfitting.
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/karo91161/scorewu-server
+cd scorewu-server
+npm install
+npm run serve
